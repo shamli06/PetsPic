@@ -7,20 +7,18 @@ import 'package:petspic/onboarding/binding/onboarding_binding.dart';
 import 'package:petspic/onboarding/view/onboarding_view.dart';
 import 'package:petspic/pet_details/binding/pet_details_binding.dart';
 import 'package:petspic/pet_details/view/pet_details_view.dart';
-import '../splash_screen.dart';
 import 'routes.dart';
 
  getPages() => [
-  GetPage(name: Routes.initial_route, page: () => const SplashScreen()),
 
   GetPage(
     name: Routes.home,
-    page: () => const HomeView(),
+    page: () =>  HomeView(),
     binding: HomeBinding()
   ),
   GetPage(
     name: Routes.onboarding,
-    page: () => const OnboardingView(),
+    page: () =>  OnboardingView(),
     binding: OnboardingBinding()
   ),
   GetPage(

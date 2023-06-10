@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Get Route Managment',
-      initialRoute: Routes.initial_route,
+      initialRoute: Routes.login,
       getPages: getPages(),
     );
   }
