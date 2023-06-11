@@ -77,8 +77,8 @@ class LoginView extends StatelessWidget {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async{
-                  String name = await controller.getName();
-                  String contact = await controller.getContact();
+                  String name = await controller.getName() ??"";
+                  String contact = await controller.getContact()??"";
                   print(contact);
                   print(controller.contact.value);
                   print(controller.name.value==name);
