@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:petspic/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 
+import '../../routes/routes.dart';
+
 class HomeView extends StatelessWidget {
 
   HomeController controller = Get.put(HomeController());
@@ -66,7 +68,7 @@ class HomeView extends StatelessWidget {
               ),
             ],
             currentIndex: controller.selectedIndex.value,
-            selectedItemColor: Colors.amber[800],
+            selectedItemColor: Colors.blueAccent,
             onTap: (index){
               controller.selectedIndex.value = index;
               controller.update();
@@ -74,6 +76,9 @@ class HomeView extends StatelessWidget {
           );
         }
       ),
+      floatingActionButton: FloatingActionButton.extended(onPressed: (){
+        Get.offAllNamed(Routes.login);
+      }, label: Text("Logout")),
     );
   }
 
