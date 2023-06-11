@@ -23,12 +23,12 @@ import 'routes.dart';
   ),
   GetPage(
     name: Routes.login,
-    page: () => const LoginView(),
+    page: () =>  LoginView(),
     binding: LoginBinding()
   ),
   GetPage(
     name: Routes.pet_details,
-    page: () => const PetDetailsView(),
+    page: () =>  PetDetailsView(),
     binding: PetDetailsBinding()
   ),
 ];

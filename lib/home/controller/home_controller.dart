@@ -1,4 +1,7 @@
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController{
@@ -8,12 +11,19 @@ class HomeController extends GetxController{
   RxString petsBreed = ''.obs;
   RxString contact = ''.obs;
 
+  var selectedImagePath = "".obs;
+
+  RxInt selectedIndex = 0.obs;
+  final ScrollController animationController = ScrollController();
+
+
   @override
   void onInit() {
     getName();
     getPetsName();
     getPetsBreed();
     getContact();
+    getImage();
     super.onInit();
   }
 
@@ -44,6 +54,13 @@ class HomeController extends GetxController{
     contact.value = prefs.getString('Contact')??"";
     update();
     return prefs.getString('Contact');
+  }
+
+  getImage()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    selectedImagePath.value = prefs.getString('PetImage')??"";
+    update();
+    return prefs.getString('PetImage');
   }
 
 

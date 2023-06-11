@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:petspic/login/controller/login_controller.dart';
 
 import '../../constant/images.dart';
 import '../../routes/routes.dart';
 
 
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+
+  LoginController controller = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +33,40 @@ class LoginView extends StatelessWidget {
                     child: Image.asset(Images.launchImage)),
               ),
             ),
-            const Padding(
+             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                    labelText: 'Name',
+                hintText: 'Enter Name',
+                ),
+                onChanged: (value){
+                  controller.name.value = value;
+                  controller.update();
+                },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(
+             Padding(
+              padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
-                obscureText: true,
-                decoration: InputDecoration(
+                keyboardType: TextInputType.number,
+                onChanged: (value){
+                  if(value.length == 10){
+                    controller.contact.value = value;
+                    controller.update();
+                  }else{
+                    controller.contact.value = "";
+                  }
+                  },
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                    labelText: 'Contact',
+                    hintText: 'Enter contact no.',
+                ),
               ),
             ),
             const SizedBox(height: 20,),
@@ -60,8 +76,21 @@ class LoginView extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: () {
-                  Get.offNamed(Routes.home);
+                onPressed: () async{
+                  String name = await controller.getName();
+                  String contact = await controller.getContact();
+                  print(contact);
+                  print(controller.contact.value);
+                  print(controller.name.value==name);
+                  print(controller.contact.value == contact);
+                  if(controller.name.value.isNotEmpty && controller.contact.value.isNotEmpty&&
+                      controller.name.value==name&& controller.contact.value == contact){
+                    print("a");
+                    Get.offNamed(Routes.home);
+                  }else{
+                    print("b");
+                    Get.snackbar("Error", "Enter valid name or contact",snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red);
+                  }
                 },
                 child: const Text(
                   'Login',

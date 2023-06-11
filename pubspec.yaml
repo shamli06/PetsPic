@@ -38,7 +38,9 @@ dependencies:
   firebase_core: ^2.13.1
   firebase_messaging: ^14.6.2
   get: ^4.6.5
-  camera: ^0.10.5+2
+  #camera: ^0.10.5+2
+  image_picker: ^0.8.8
+  google_maps_flutter: ^2.3.0
   shared_preferences: ^2.1.2
 
 dev_dependencies:
