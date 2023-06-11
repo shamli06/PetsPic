@@ -5,8 +5,6 @@ import 'package:petspic/login/binding/login_binding.dart';
 import 'package:petspic/login/view/login_view.dart';
 import 'package:petspic/onboarding/binding/onboarding_binding.dart';
 import 'package:petspic/onboarding/view/onboarding_view.dart';
-import 'package:petspic/pet_details/binding/pet_details_binding.dart';
-import 'package:petspic/pet_details/view/pet_details_view.dart';
 import 'routes.dart';
 
  getPages() => [
@@ -25,10 +23,5 @@ import 'routes.dart';
     name: Routes.login,
     page: () =>  LoginView(),
     binding: LoginBinding()
-  ),
-  GetPage(
-    name: Routes.pet_details,
-    page: () =>  PetDetailsView(),
-    binding: PetDetailsBinding()
   ),
 ];
