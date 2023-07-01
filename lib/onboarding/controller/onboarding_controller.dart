@@ -4,7 +4,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petspic/repository/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/user_model.dart';
 
 class OnboardingController extends GetxController{
 
@@ -19,6 +22,12 @@ class OnboardingController extends GetxController{
   RxString petsBreed = ''.obs;
   RxString password = ''.obs;
   RxString selectedImagePath = ''.obs;
+
+  UserRepository userRepository = Get.put(UserRepository());
+
+  createUser(UserModel user)async{
+    await userRepository.createUser(user);
+  }
 
   void getImage(ImageSource imageSource)async{
     final pickedFile = await ImagePicker().pickImage(source: imageSource, maxHeight: 250, maxWidth: Get.width);

@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:petspic/onboarding/controller/onboarding_controller.dart';
 import 'package:petspic/routes/routes.dart';
 
+import '../../models/user_model.dart';
+
 class OnboardingView extends StatelessWidget {
 
   OnboardingController controller = Get.find<OnboardingController>();
@@ -85,12 +87,17 @@ class OnboardingView extends StatelessWidget {
                                 controller.petsBreed.value.isNotEmpty&&controller.password.value.isNotEmpty&&controller.selectedImagePath.value.isNotEmpty){
                               //controller.setName(controller.name.value);
                              // print(controller.name.value);
+                              final user = UserModel(
+                                email: controller.email.value.trim(), petsName: controller.petsName.value.trim(), petsBreed: controller.petsBreed.value.trim(),
+
+                              );
                               controller.setPetsName(controller.petsName.value);
                               controller.setPetsBreed(controller.petsBreed.value);
                               //controller.setContact(controller.contact.value);
                               FirebaseAuth.instance.createUserWithEmailAndPassword(email: controller.email.value, password: controller.password.value).then((value) => Get.offAllNamed(Routes.home)).onError((error, stackTrace){
                                 Get.snackbar("Error", error.toString());
                               });
+                              controller.createUser(user);
                             }else{
                               Get.snackbar("Error", "Please enter valid name, contact, image",backgroundColor: Colors.red,
                               snackPosition: SnackPosition.BOTTOM);
