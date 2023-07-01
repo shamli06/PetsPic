@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:petspic/constant/images.dart';
 import 'package:petspic/home/controller/home_controller.dart';
@@ -24,7 +23,10 @@ class HomeView extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: Colors.blueAccent
                   ),
-                    child: Image.file(File(controller.selectedImagePath.value))):SizedBox.shrink(),
+                    child: Image(
+                      image: NetworkImage(controller.selectedImagePath.value),
+                      fit: BoxFit.cover,
+                    )):SizedBox.shrink(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

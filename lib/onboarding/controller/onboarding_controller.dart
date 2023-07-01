@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +25,14 @@ class OnboardingController extends GetxController{
     if(pickedFile != null){
       selectedImagePath.value = pickedFile.path;
       print(selectedImagePath.value);
+      String path = "files/${pickedFile.name}";
+      final file = File(pickedFile.path);
+      final ref = FirebaseStorage.instance.ref().child("pet.jpg");
+      try{
+        await ref.putFile(file);
+      } catch(error){
+        Get.snackbar("Error", error.toString());
+      }
       setImage(selectedImagePath.value);
 
     }else{
@@ -55,6 +66,7 @@ class OnboardingController extends GetxController{
   setImage(String image) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('PetImage', image);
+
   }
 
 }
