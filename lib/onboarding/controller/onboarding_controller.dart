@@ -10,10 +10,11 @@ class OnboardingController extends GetxController{
     super.onInit();
   }
 
-  RxString name = ''.obs;
+  //RxString name = ''.obs;
+  RxString email = "".obs;
   RxString petsName = ''.obs;
   RxString petsBreed = ''.obs;
-  RxString contact = ''.obs;
+  RxString password = ''.obs;
   RxString selectedImagePath = ''.obs;
 
   void getImage(ImageSource imageSource)async{

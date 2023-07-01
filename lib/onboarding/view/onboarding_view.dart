@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -54,10 +55,10 @@ class OnboardingView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          makeInput(label: "Name", type: 'name'),
+                          makeInput(label: "Email", type: 'email',email: true),
                           makeInput(label: "Pet's Name", type: 'petsName'),
                           makeInput(label: "Pet's Breed", type: 'petsBreed'),
-                          makeInput(label: "Contact",contact: true, type: 'contact'),
+                          makeInput(label: "Password",password: true, type: 'password'),
                           uploadPhoto(context)
                         ],
                       ),
@@ -80,15 +81,16 @@ class OnboardingView extends StatelessWidget {
                           minWidth: double.infinity,
                           height:60,
                           onPressed: (){
-                            if(controller.name.value.isNotEmpty && controller.petsName.value.isNotEmpty&&
-                                controller.petsBreed.value.isNotEmpty&&controller.contact.value.isNotEmpty&&controller.selectedImagePath.value.isNotEmpty){
-                              controller.setName(controller.name.value);
-                              print(controller.name.value);
+                            if(controller.email.value.isNotEmpty && controller.petsName.value.isNotEmpty&&
+                                controller.petsBreed.value.isNotEmpty&&controller.password.value.isNotEmpty&&controller.selectedImagePath.value.isNotEmpty){
+                              //controller.setName(controller.name.value);
+                             // print(controller.name.value);
                               controller.setPetsName(controller.petsName.value);
                               controller.setPetsBreed(controller.petsBreed.value);
-                              controller.setContact(controller.contact.value);
-
-                              Get.offAllNamed(Routes.home);
+                              //controller.setContact(controller.contact.value);
+                              FirebaseAuth.instance.createUserWithEmailAndPassword(email: controller.email.value, password: controller.password.value).then((value) => Get.offAllNamed(Routes.home)).onError((error, stackTrace){
+                                Get.snackbar("Error", error.toString());
+                              });
                             }else{
                               Get.snackbar("Error", "Please enter valid name, contact, image",backgroundColor: Colors.red,
                               snackPosition: SnackPosition.BOTTOM);
@@ -194,7 +196,7 @@ class OnboardingView extends StatelessWidget {
     );
   }
 
-  Widget makeInput({label, contact = false, type = ''}){
+  Widget makeInput({label, password = false,email = false, type = ''}){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -205,20 +207,17 @@ class OnboardingView extends StatelessWidget {
         ),),
         const SizedBox(height: 5,),
         TextField(
-          keyboardType: contact ?TextInputType.number:TextInputType.text,
+          obscureText: password,
+          keyboardType: email ?TextInputType.emailAddress:TextInputType.text,
           onChanged: (value){
-            if(type == 'name'){
-              controller.name.value = value;
+            if(type == 'email'){
+              controller.email.value = value;
             }else if(type == 'petsName'){
               controller.petsName.value = value;
             }else if(type == 'petsBreed'){
               controller.petsBreed.value = value;
-            }else if(type == "contact"){
-              if(value.length == 10) {
-                controller.contact.value = value;
-              }else{
-                controller.contact.value = "";
-              }
+            }else if(type == "password"){
+                controller.password.value = value;
             }
           },
           decoration: InputDecoration(

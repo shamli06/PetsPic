@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "505473965187",
+    "project_id": "petspic",
+    "storage_bucket": "petspic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505473965187:android:a68832acfbb5d762694fb6",
+        "android_client_info": {
+          "package_name": "com.example.petspic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505473965187-gl4ea1nknsgnnns4nlne958pmf2pquc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petspic",
+            "certificate_hash": "c89a4c7f77ff1b63a5eea5d95da6f40b411c44f3"
+          }
+        },
+        {
+          "client_id": "505473965187-p77qomusr95utdjpg0b4no467urjc7qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP98a10OQKvdwwNNXG9ZEtRh5D-b2JbXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505473965187-p77qomusr95utdjpg0b4no467urjc7qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
