@@ -94,7 +94,7 @@ class OnboardingView extends StatelessWidget {
                               controller.setPetsName(controller.petsName.value);
                               controller.setPetsBreed(controller.petsBreed.value);
                               //controller.setContact(controller.contact.value);
-                              FirebaseAuth.instance.createUserWithEmailAndPassword(email: controller.email.value, password: controller.password.value).then((value) => Get.offAllNamed(Routes.home)).onError((error, stackTrace){
+                              FirebaseAuth.instance.createUserWithEmailAndPassword(email: controller.email.value, password: controller.password.value).then((value) => Get.offAllNamed(Routes.home,arguments: {'email':controller.email.value})).onError((error, stackTrace){
                                 Get.snackbar("Error", error.toString());
                               });
                               controller.createUser(user);

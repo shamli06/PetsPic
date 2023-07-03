@@ -63,8 +63,8 @@ class LoginView extends StatelessWidget {
                   },
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Contact',
-                    hintText: 'Enter contact no.',
+                    labelText: 'Password',
+                    hintText: 'Enter password',
                 ),
               ),
             ),
@@ -80,7 +80,7 @@ class LoginView extends StatelessWidget {
                       ){
                     print("a");
                     FirebaseAuth.instance.signInWithEmailAndPassword(email: controller.email.value, password: controller.password.value).then((value){
-                      Get.offNamed(Routes.home);
+                      Get.offNamed(Routes.home, arguments: {"email":controller.email.value});
                     }).onError((error, stackTrace) {
                       Get.snackbar("Error", error.toString(),snackPosition: SnackPosition.BOTTOM,colorText: Colors.white,backgroundColor: Colors.red);
                     });

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petspic/constant/images.dart';
 import 'package:petspic/home/controller/home_controller.dart';
 import 'package:get/get.dart';
-
 import '../../routes/routes.dart';
 
 class HomeView extends StatelessWidget {
@@ -30,10 +29,10 @@ class HomeView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Name: ${controller.name.value}", style: TextStyle(fontSize: 20),),
+                    Text("Name: ${controller.email.value}", style: TextStyle(fontSize: 20),),
                     Text("Pet's Name: ${controller.petsName.value}", style: TextStyle(fontSize: 20),),
                     Text("Pet's Breed: ${controller.petsBreed.value}", style: TextStyle(fontSize: 20),),
-                    Text("Contact No: ${controller.contact.value}", style: TextStyle(fontSize: 20),),
+                    // Text("Contact No: ${controller.contact.value}", style: TextStyle(fontSize: 20),),
                   ],
                 )
 

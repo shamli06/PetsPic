@@ -2,11 +2,14 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:petspic/repository/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/user_model.dart';
 
 class HomeController extends GetxController{
 
-  RxString name = ''.obs;
+  RxString email = ''.obs;
   RxString petsName = ''.obs;
   RxString petsBreed = ''.obs;
   RxString contact = ''.obs;
@@ -15,10 +18,14 @@ class HomeController extends GetxController{
 
   RxInt selectedIndex = 0.obs;
   final ScrollController animationController = ScrollController();
+  final _userRepo = Get.put(UserRepository());
 
 
   @override
   void onInit() {
+    email.value = Get.arguments["email"];
+    print("email ${email.value}");
+    getUserData(email.value);
     getName();
     getPetsName();
     getPetsBreed();
@@ -27,11 +34,22 @@ class HomeController extends GetxController{
     super.onInit();
   }
 
+  getUserData(String email)async{
+    if(email != null){
+      UserModel userData =  await _userRepo.getUserDetails(email);
+      petsName.value = userData.petsName??"";
+      petsBreed.value = userData.petsBreed??"";
+      update();
+    }else{
+      Get.snackbar("Error", "Login to continue");
+    }
+  }
+
   getName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name.value =  prefs.getString('Name')??"";
+    email.value =  prefs.getString('Name')??"";
     update();
-    print(name.value);
+    print(email.value);
     return prefs.getString('Name');
   }
 
