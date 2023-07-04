@@ -5,6 +5,7 @@ import 'package:petspic/login/binding/login_binding.dart';
 import 'package:petspic/login/view/login_view.dart';
 import 'package:petspic/onboarding/binding/onboarding_binding.dart';
 import 'package:petspic/onboarding/view/onboarding_view.dart';
+import 'package:petspic/repository/push_notification_screen.dart';
 import 'routes.dart';
 
  getPages() => [
@@ -23,5 +24,9 @@ import 'routes.dart';
     name: Routes.login,
     page: () =>  LoginView(),
     binding: LoginBinding()
+  ),
+  GetPage(
+    name: Routes.pushNotification,
+    page: () =>  const NotificationScreen(),
   ),
 ];
