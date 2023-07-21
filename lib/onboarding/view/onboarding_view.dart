@@ -89,7 +89,6 @@ class OnboardingView extends StatelessWidget {
                              // print(controller.name.value);
                               final user = UserModel(
                                 email: controller.email.value.trim(), petsName: controller.petsName.value.trim(), petsBreed: controller.petsBreed.value.trim(),
-
                               );
                               controller.setPetsName(controller.petsName.value);
                               controller.setPetsBreed(controller.petsBreed.value);

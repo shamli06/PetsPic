@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:petspic/repository/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constant/images.dart';
 import '../../models/user_model.dart';
 
 class HomeController extends GetxController{
@@ -20,16 +21,24 @@ class HomeController extends GetxController{
   final ScrollController animationController = ScrollController();
   final _userRepo = Get.put(UserRepository());
 
+  List<String> images = [
+    Images.image1,Images.image2,Images.image3,Images.image4,Images.image5
+
+  ];
+  RxList allUsers = [].obs;
+
 
   @override
   void onInit() {
     email.value = Get.arguments["email"];
+    update();
     print("email ${email.value}");
+    getAllUsers(email.value);
     getUserData(email.value);
-    getName();
-    getPetsName();
-    getPetsBreed();
-    getContact();
+    // getName();
+    // getPetsName();
+    // getPetsBreed();
+    // getContact();
     getImage();
     super.onInit();
   }
@@ -43,6 +52,11 @@ class HomeController extends GetxController{
     }else{
       Get.snackbar("Error", "Login to continue");
     }
+  }
+
+  getAllUsers(String email)async{
+    allUsers.value = await _userRepo.allUser(email);
+    update();
   }
 
   getName() async {
@@ -83,6 +97,11 @@ class HomeController extends GetxController{
     update();
     return prefs.getString('PetImage');
   }
+
+  getImages()async{
+
+  }
+
 
 
 }

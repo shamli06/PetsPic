@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:petspic/constant/images.dart';
 import 'package:petspic/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 import '../../routes/routes.dart';
@@ -17,7 +16,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               children: [
                 controller.selectedImagePath.value.isNotEmpty?Container(
-                  height: Get.height/3,
+                  height: Get.height/2,
                   width: Get.width,
                   decoration: const BoxDecoration(
                     color: Colors.blueAccent
@@ -29,9 +28,36 @@ class HomeView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Name: ${controller.email.value}", style: TextStyle(fontSize: 20),),
-                    Text("Pet's Name: ${controller.petsName.value}", style: TextStyle(fontSize: 20),),
-                    Text("Pet's Breed: ${controller.petsBreed.value}", style: TextStyle(fontSize: 20),),
+                    Container(
+                      width: Get.width,
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),boxShadow: [BoxShadow(blurRadius: 0.2)]
+                      ),
+                        child: Text("Email: ${controller.email.value}", style: TextStyle(fontSize: 20,overflow: TextOverflow.ellipsis),maxLines: 2,softWrap: true,)),
+                    Container(
+                        width: Get.width,
+                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10),
+                            ),boxShadow: [BoxShadow(blurRadius: 0.2)]
+                        ),
+                        child: Text("Pet's Name: ${controller.petsName.value}", style: TextStyle(fontSize: 20),softWrap: true,)),
+                    Container(
+                        width: Get.width,
+                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10),
+                            ),boxShadow: [BoxShadow(blurRadius: 0.2)]
+                        ),
+                        child: Text("Pet's Breed: ${controller.petsBreed.value}", style: TextStyle(fontSize: 20),)),
                     // Text("Contact No: ${controller.contact.value}", style: TextStyle(fontSize: 20),),
                   ],
                 )
@@ -39,19 +65,40 @@ class HomeView extends StatelessWidget {
               ],
             ),
           ):SafeArea(
-            child: GridView.count(crossAxisCount: 2,scrollDirection: Axis.vertical,children: [
-              Image.network(Images.image5),
-              Image.network(Images.image4),
-              Image.network(Images.image3),
-              Image.network(Images.image2),
-              Image.network(Images.image1),
-              Image.network(Images.image5),
-              Image.network(Images.image3),
-              Image.network(Images.image4),
-              Image.network(Images.image2),
-              Image.network(Images.image1),
+            child: controller.allUsers.isNotEmpty?Obx(() {
+                return ListView.builder(
+                  itemCount: controller.allUsers.length,
+                    itemBuilder: (context,index){
+                  return Container(
+                    height: Get.height/6,
+                    width: Get.width,
+                    margin: EdgeInsets.all(5),
 
-            ],),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10),),
+                          border: Border.all(color: Colors.black)
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: Get.width/3,
+                            child: Image.network(controller.images[index],fit: BoxFit.fill,)),
+                        SizedBox(width: 3,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Name: ${controller.allUsers[index].email}", style: TextStyle(fontSize: 17),maxLines: 2,
+                            softWrap: true,),
+                            Text("Pet's Name: ${controller.allUsers[index].petsName}", style: TextStyle(fontSize: 17),maxLines: 2,),
+                            Text("Pet's Breed: ${controller.allUsers[index].petsBreed}", style: TextStyle(fontSize: 17),maxLines: 2,)
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                });
+              }
+            ):Center(child: CircularProgressIndicator()),
           );
         }
 
